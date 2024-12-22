@@ -1,5 +1,0 @@
-[[database]]
-Name = 'local'
-Provider = 'mysql'
-DBName = 'moovmoov-platform'
-URL = 'mysql://root:root@localhost:8889/moovmoov-platform'
