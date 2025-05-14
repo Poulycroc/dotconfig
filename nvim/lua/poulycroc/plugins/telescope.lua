@@ -63,8 +63,8 @@ return {
 
     -- set keymaps
     local map = vim.keymap.set
+    local builtin = require("telescope.builtin")
 
-    map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "Telescope Live grep" })
     map("n", "<leader>fc", "<cmd>Telescope grep_string<CR>", { desc = "Find string under cursor" })
     map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Telescope Find buffers" })
     map("n", "<leader>fh", "<cmd>Telescope git_bcommits<CR>", { desc = "Telescope Git file history" })
@@ -83,5 +83,10 @@ return {
     map("n", "<leader>fH", "<cmd>Telescope help_tags<CR>", { desc = "Telescope Help page" })
     map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Telescope Find files" })
     map("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
+
+    map("n", "<leader>ds", builtin.lsp_document_symbols, { desc = "Telescope LSP Document symbols" })
+    map("n", "<leader>ws", builtin.lsp_workspace_symbols, { desc = "Telescope LSP Workspace symbols" })
+    map("n", "<leader>fw", builtin.live_grep, { desc = "Telescope Live grep" })
+    map("n", "<leader>fd", builtin.diagnostics, { desc = "Telescope LSP Diagnostics" })
   end,
 }
