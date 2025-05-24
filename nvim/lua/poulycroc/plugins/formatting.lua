@@ -3,6 +3,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     local conform = require("conform")
+    local map = vim.keymap.set
 
     conform.setup({
       -- Override only the args for stylua, removing --respect-ignores
@@ -32,7 +33,7 @@ return {
       },
     })
 
-    vim.keymap.set({ "n", "v" }, "<leader>fm", function()
+    map({ "n", "v" }, "<leader>fm", function()
       conform.format({
         lsp_fallback = true,
         async        = false,
