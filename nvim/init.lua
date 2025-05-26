@@ -884,8 +884,11 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'lua_ls', 'stylua' },
-        javascript = { { "prettierd", "prettier" }, { "eslint_d", "eslint" } },
-        typescript = { { "prettierd", "prettier" }, { "eslint_d", "eslint" } },
+        javascript = { "eslint_d", "eslint", "prettierd", "prettier", stop_after_first = true },
+        javascriptreact = { "eslint_d", "eslint", "prettierd", "prettier", stop_after_first = true },
+        typescript = { "eslint_d", "eslint", "prettierd", "prettier", stop_after_first = true },
+        typescriptreact = { "eslint_d", "eslint", "prettierd", "prettier", stop_after_first = true },
+        vue = { "eslint_d", "eslint", "prettierd", "prettier", stop_after_first = true },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
