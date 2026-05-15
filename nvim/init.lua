@@ -25,6 +25,8 @@ vim.pack.add({
 	"https://github.com/nvim-neotest/neotest",
 	'https://github.com/mfussenegger/nvim-dap',
 	{ src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.x') }, -- pinning so rust binary dependency automatically downloads
+
+	{ src = "https://github.com/catppuccin/nvim" },
 })
 
 -- Plugins setups
@@ -37,5 +39,7 @@ require("poulycroc.plugins.comment")
 require("poulycroc.plugins.folke")
 require('poulycroc.plugins.fzf-lua')
 require('poulycroc.plugins.blink')
+
+require("poulycroc.plugins.catppuccin")
 
 require("poulycroc.config.keymaps")
