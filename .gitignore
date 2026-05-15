@@ -1,0 +1,12 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!README.md
+
+!nvim/
+!nvim/**
+
+!tmux/
+!tmux/**

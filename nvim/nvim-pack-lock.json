@@ -1,0 +1,21 @@
+{
+  "plugins": {
+    "Comment.nvim": [],
+    "blink.cmp": {
+      "version": "1.0.0 - 2.0.0"
+    },
+    "flash.nvim": [],
+    "fzf-lua": [],
+    "gitsigns.nvim": [],
+    "grapple.nvim": [],
+    "lazydev.nvim": [],
+    "lazygit.nvim": [],
+    "neotest": [],
+    "nvim-dap": [],
+    "nvim-tree.lua": [],
+    "nvim-web-devicons": [],
+    "render-markdown.nvim": [],
+    "todo-comments.nvim": [],
+    "undotree": []
+  }
+}
