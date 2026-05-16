@@ -4,19 +4,51 @@
     "blink.cmp": {
       "version": "1.0.0 - 2.0.0"
     },
+    "conform.nvim": [],
+    "copilot.lua": [],
     "flash.nvim": [],
     "fzf-lua": [],
     "gitsigns.nvim": [],
     "grapple.nvim": [],
     "lazydev.nvim": [],
     "lazygit.nvim": [],
+    "markdown-preview.nvim": {
+      "rev": "a923f5f",
+      "src": "https://github.com/iamcco/markdown-preview.nvim"
+    },
+    "mason-lspconfig.nvim": [],
+    "mason-tool-installer.nvim": [],
+    "mason.nvim": [],
+    "mini.ai": [],
+    "mini.pairs": [],
+    "mini.statusline": [],
+    "mini.surround": [],
     "neotest": [],
+    "neotest-jest": [],
+    "neotest-phpunit": [],
+    "neotest-vitest": [],
+    "nui.nvim": [],
     "nvim": [],
     "nvim-dap": [],
+    "nvim-dap-go": [],
+    "nvim-dap-ui": [],
+    "nvim-dap-virtual-text": [],
+    "nvim-lspconfig": [],
+    "nvim-nio": [],
     "nvim-tree.lua": [],
+    "nvim-treesitter": [],
     "nvim-web-devicons": [],
-    "render-markdown.nvim": [],
+    "plenary.nvim": [],
+    "smart-splits.nvim": {
+      "rev": "25bf40a",
+      "src": "https://github.com/mrjones2014/smart-splits.nvim"
+    },
     "todo-comments.nvim": [],
-    "undotree": []
+    "undotree": [],
+    "vim-fugitive": [],
+    "vim-tmux-navigator": {
+      "rev": "c45243d",
+      "src": "https://github.com/christoomey/vim-tmux-navigator.git"
+    }
   }
 }

@@ -3,4 +3,3 @@ require("Comment").setup({
 	pre_hook = nil,
 	post_hook = nil,
 })
-

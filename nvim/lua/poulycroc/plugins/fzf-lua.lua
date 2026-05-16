@@ -1,26 +1,38 @@
-local fzf = require('fzf-lua')
-local map = vim.keymap.set
-
-fzf.setup({
-	ui_select = true,
+require("fzf-lua").setup({
+	winopts = { backdrop = 85 },
+	file_ignore_patterns = {
+		"node_modules/",
+		"vendor/",
+		"dist/",
+		".next/",
+		".git/",
+		".gitlab/",
+		"build/",
+		"target/",
+		"package-lock.json",
+		"pnpm-lock.yaml",
+		"yarn.lock",
+	},
 	keymap = {
 		builtin = {
-			["<C-d>"] = 'preview-page-down', -- Better scrolling within the displays
-			["<C-u>"] = 'preview-page-up',
+			["<C-f>"] = "preview-page-down",
+			["<C-b>"] = "preview-page-up",
+			["<C-p>"] = "toggle-preview",
+		},
+		fzf = {
+			["ctrl-a"] = "toggle-all",
+			["ctrl-t"] = "first",
+			["ctrl-g"] = "last",
+			["ctrl-d"] = "half-page-down",
+			["ctrl-u"] = "half-page-up",
 		},
 	},
-	winopts = { backdrop = 85 },
-	files = {
-		formatter = 'path.filename_first',
+	actions = {
+		files = {
+			["ctrl-q"] = require("fzf-lua.actions").file_sel_to_qf,
+			["ctrl-n"] = require("fzf-lua.actions").toggle_ignore,
+			["ctrl-h"] = require("fzf-lua.actions").toggle_hidden,
+			["enter"] = require("fzf-lua.actions").file_edit_or_qf,
+		},
 	},
 })
-
-map('n', '<leader>ff', '<cmd>FzfLua files<cr>', { desc = 'Find files' })
-map('n', '<leader>fw', '<cmd>FzfLua live_grep<cr>', { desc = 'Find live grep' })
-map('n', '<leader>fr', '<cmd>FzfLua resume<cr>', { desc = 'Resume last picker' })
-map('n', '<leader>fb', '<cmd>FzfLua buffers<cr>', { desc = 'Buffers' })
-
-map('n', 'grr', fzf.lsp_references, { desc = 'References' })
-map('n', 'gri', fzf.lsp_implementations, { desc = 'Implementations' })
-map('n', 'gra', fzf.lsp_code_actions, { desc = 'Code actions' })
-map('n', 'gd', fzf.lsp_definitions, { desc = 'Go to definition' })

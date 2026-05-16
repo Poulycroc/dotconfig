@@ -42,6 +42,17 @@ map("n", "Q", "<nop>", { noremap = true, silent = true, desc = "Disable Q" })
 map("n", "f", "<nop>", { noremap = true, silent = true, desc = "Disable f" })
 map("n", "x", '"_x', { desc = "Delete without yank" })
 
+-- Fzf
+map("n", "<leader>ff", "<cmd>FzfLua files<CR>")
+map("n", "<leader>fb", "<cmd>FzfLua buffers<CR>")
+map("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>")
+map("n", "<leader>fh", "<cmd>FzfLua neovim help<CR>")
+map("n", "<leader>fl", "<cmd>Grapple toggle_tags<cr>", { desc = "Toggle tags menu" })
+
+map("n", "gR", "<cmd>FzfLua lsp_implementations<CR>")
+map("n", "gd", "<cmd>FzfLua lsp_definitions<CR>")
+map("n", "gD", "<cmd>FzfLua lsp_declarations<CR>")
+
 -- GIT
 map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "Open lazy git" })
 map("n", "<leader>gl", "<cmd>LazyGitLog<cr>", { desc = "Open lazy git log" })
@@ -49,8 +60,16 @@ map("n", "<leader>gs", "<cmd>Git<CR>", { desc = "Git fugitive" })
 map("n", "<leader>gp", "<cmd>Git push<CR>", { desc = "Git push fugitive" })
 map("n", "<leader>GU", ":UndotreeToggle<CR>", { desc = "Toggle UndoTree" })
 
--- TreeToggle
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "toggle file explorer" })
+
+-- laravel keymaps
+map("n", "<leader>llr", "<cmd>lua Laravel.pickers.routes()<cr>", { desc = "Laravel: Open tinkering" })
+map(
+	"n",
+	"<leader>llt",
+	"<cmd>lua Laravel.commands.run('gf')<cr>",
+	{ desc = "Laravel: Open tinkering", expr = true, noremap = true }
+)
 
 -- comment
 map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
@@ -67,3 +86,8 @@ map("n", "<leader>M", "<cmd>Grapple toggle_tags<cr>", { desc = "Grapple open tag
 map("n", "<tab>", "<cmd>Grapple cycle_tags next<cr>", { desc = "Grapple cycle next tag" })
 map("n", "<S-tab>", "<cmd>Grapple cycle_tags prev<cr>", { desc = "Grapple cycle previous tag" })
 
+-- Smart split
+-- map("n", "<C-h>", require("smart-splits").move_cursor_left)
+-- map("n", "<C-j>", require("smart-splits").move_cursor_down)
+-- map("n", "<C-k>", require("smart-splits").move_cursor_up)
+-- map("n", "<C-l>", require("smart-splits").move_cursor_right)

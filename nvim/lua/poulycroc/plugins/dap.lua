@@ -1,44 +1,55 @@
-local dap = require('dap')
-local map = vim.keymap.set
+local dap = require("dap")
+local dapui = require("dapui")
 
-dap.adapters.debugpy = function(cb, config) -- also $ uv tool install debugpy@latest
-	if config.request == 'attach' then
-		cb({
-			type = 'server',
-			port = config.connect.port,
-			host = config.connect.host or '127.0.0.1',
-		})
-	else
-		cb({
-			type = 'executable',
-			command = 'debugpy-adapter',
-		})
-	end
-end
+-- optional
+-- require('mason-nvim-dap').setup {
+--     automatic_installation = true,
+--     handlers = {},
+--     ensure_installed = {
+--         'delve',
+--     },
+-- }
 
-dap.configurations.python = { -- https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
-	{
-		type = 'debugpy',
-		request = 'launch',
-		name = 'Launch file',
-		program = '${file}',
-		python = function()
-			local root = vim.fs.root(0, '.venv')
-			return { root and root .. '/.venv/bin/python' or 'python3' }
-		end,
-		cwd = function()
-			return vim.fs.root(0, '.venv') or vim.fn.getcwd()
-		end,
+-- Dap UI setup
+dapui.setup({
+	icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },
+	controls = {
+		icons = {
+			pause = "⏸",
+			play = "▶",
+			step_into = "⏎",
+			step_over = "⏭",
+			step_out = "⏮",
+			step_back = "b",
+			run_last = "▶▶",
+			terminate = "⏹",
+			disconnect = "⏏",
+		},
 	},
-}
+})
 
-map('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug toggle breakpoint' })
-map('n', '<leader>dc', dap.continue, { desc = 'Debug continue' })
-map('n', '<leader>dq', dap.terminate, { desc = 'Debug terminate' })
-map('n', '<leader>dr', dap.repl.open, { desc = 'Debug open REPL' })
-map('n', '<leader>dl', dap.run_last, { desc = 'Debug run last' })
-map({ 'n', 'v' }, '<leader>dh', require('dap.ui.widgets').hover, { desc = 'Debug hover' })
-map('n', '<Down>', dap.step_over, { desc = 'Debug step over' })
-map('n', '<Right>', dap.step_into, { desc = 'Debug step into' })
-map('n', '<Left>', dap.step_out, { desc = 'Debug step out' })
-map('n', '<Up>', dap.restart_frame, { desc = 'Debug restart frame' })
+-- Automatically open/close DAP UI
+dap.listeners.after.event_initialized["dapui_config"] = dapui.open
+dap.listeners.before.event_terminated["dapui_config"] = dapui.close
+dap.listeners.before.event_exited["dapui_config"] = dapui.close
+
+-- Setup virtual text to show variable values inline
+require("nvim-dap-virtual-text").setup()
+
+require("dap-go").setup({
+	delve = {
+		-- Use Mason's delve installation with fallback to system delve
+		path = function()
+			local mason_delve = vim.fn.stdpath("data") .. "/mason/bin/dlv"
+			if vim.fn.executable(mason_delve) == 1 then
+				return mason_delve
+			end
+			-- Fallback to system delve
+			return vim.fn.exepath("dlv") ~= "" and vim.fn.exepath("dlv") or "dlv"
+		end,
+
+		-- On Windows delve must be run attached or it crashes.
+		-- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
+		-- detached = vim.fn.has 'win32' == 0,
+	},
+})

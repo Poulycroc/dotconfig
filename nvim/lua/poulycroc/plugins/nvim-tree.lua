@@ -84,3 +84,4 @@ vim.cmd([[
     :hi link NvimTreeImageFile   Title
 		:hi NvimTreeCursorLine guibg=#3b4252 guifg=#88c0d0
 ]])
+

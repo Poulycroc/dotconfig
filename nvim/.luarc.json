@@ -1,0 +1,16 @@
+{
+  "diagnostics.globals": [
+    "vim",
+    "require",
+    "pcall",
+    "ipairs",
+    "pairs",
+    "next",
+    "tonumber",
+    "tostring",
+    "string",
+    "table",
+    "math",
+    "os"
+  ]
+}
