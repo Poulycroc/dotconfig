@@ -7,6 +7,7 @@ My personal configuration files for neovim, tmux and stuff
 ```
 dotfiles/
 |── nvim/
-└── kitty/
+|── kitty/
+└── tmux/
 ```
 
