@@ -4,6 +4,10 @@
     "blink.cmp": {
       "version": "1.0.0 - 2.0.0"
     },
+    "blink.compat": {
+      "rev": "1454f14",
+      "src": "https://github.com/saghen/blink.compat"
+    },
     "conform.nvim": [],
     "copilot.lua": [],
     "flash.nvim": [],
@@ -38,6 +42,10 @@
     "nvim-tree.lua": [],
     "nvim-treesitter": [],
     "nvim-web-devicons": [],
+    "obsidian.nvim": {
+      "rev": "726b60c",
+      "src": "https://github.com/epwalsh/obsidian.nvim"
+    },
     "plenary.nvim": [],
     "smart-splits.nvim": {
       "rev": "25bf40a",

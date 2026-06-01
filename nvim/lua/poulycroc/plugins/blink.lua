@@ -32,6 +32,7 @@ require("blink.cmp").setup({
 		default = { "lazydev", "lsp", "path", "snippets", "buffer" },
 		per_filetype = {
 			lua = { inherit_defaults = true, "lazydev" },
+			markdown = { inherit_defaults = true, "obsidian", "obsidian_new", "obsidian_tags" },
 		},
 		providers = {
 			lazydev = {
@@ -49,6 +50,21 @@ require("blink.cmp").setup({
 			-- 	score_offset = 1000, -- Highest priority
 			-- 	min_keyword_length = 1,
 			-- },
+			obsidian = {
+				name = "obsidian",
+				module = "blink.compat.source",
+				score_offset = 100,
+			},
+			obsidian_new = {
+				name = "obsidian_new",
+				module = "blink.compat.source",
+				score_offset = 100,
+			},
+			obsidian_tags = {
+				name = "obsidian_tags",
+				module = "blink.compat.source",
+				score_offset = 100,
+			},
 			cmdline = {
 				min_keyword_length = 2,
 			},

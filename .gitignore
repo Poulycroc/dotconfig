@@ -13,3 +13,6 @@
 
 !kitty/
 !kitty/**
+
+!bin/
+!bin/**

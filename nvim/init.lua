@@ -9,6 +9,7 @@ vim.pack.add({
 
 	{ src = "https://github.com/folke/lazydev.nvim" },
 	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
+	{ src = "https://github.com/saghen/blink.compat" },
 	{ src = "https://github.com/ibhagwan/fzf-lua" },
 
 	{ src = "https://github.com/tpope/vim-fugitive" },
@@ -74,12 +75,16 @@ vim.pack.add({
 
 	-- markdown
 	{ src = "https://github.com/iamcco/markdown-preview.nvim" },
+
+	-- obsidian
+	{ src = "https://github.com/epwalsh/obsidian.nvim" },
 })
 
 -- require("poulycroc.plugins.smart-splits")
 
 require("poulycroc.core.lsp")
 require("poulycroc.core.mason")
+require("poulycroc.core.workflows")
 
 require("poulycroc.plugins.blink")
 require("poulycroc.plugins.fzf-lua")
@@ -98,6 +103,7 @@ require("poulycroc.plugins.ai")
 require("poulycroc.plugins.git")
 -- require("poulycroc.plugins.languages")
 require("poulycroc.plugins.terminal")
+require('poulycroc.plugins.obsidian')
 
 require("poulycroc.plugins.catppuccin")
 
