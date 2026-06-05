@@ -9,7 +9,8 @@ dotfiles/
 |── bin/
 |── nvim/
 |── kitty/
-└── tmux/
+|── tmux/
+└── yazi/
 ```
 
 ## Credits
