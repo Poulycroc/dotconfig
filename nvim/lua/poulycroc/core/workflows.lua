@@ -2,6 +2,9 @@
 -- obsidian --
 --------------
 --
+-- this workflow is ispired by https://github.com/zazencodes
+-- the idea is to have a workflow for quickly capturing notes in the inbox, then reviewing them at the end of the day/week and moving them to the zettelkasten or deleting them
+--
 -- >>> oo # from shell, navigate to vault (optional)
 --
 -- # NEW NOTE
@@ -24,7 +27,9 @@
 -- create new note in inbox with template (prompts for name)
 vim.keymap.set("n", "<leader>on", function()
 	vim.ui.input({ prompt = "Note name: " }, function(name)
-		if not name or name == "" then return end
+		if not name or name == "" then
+			return
+		end
 		vim.cmd("ObsidianNew " .. name)
 		vim.defer_fn(function()
 			vim.cmd("ObsidianTemplate note")
@@ -53,3 +58,79 @@ vim.keymap.set("n", "<leader>oz", ':FzfLua live_grep cwd="/Users/poulycroc/Pouly
 vim.keymap.set("n", "<leader>ok", ":!mv '%:p' /Users/poulycroc/PoulyStuff/zettelkasten<cr>:bd<cr>")
 -- delete file in current buffer
 vim.keymap.set("n", "<leader>odd", ":!rm '%:p'<cr>:bd<cr>")
+
+--------------
+-- journal --
+--------------
+--
+-- plain text journaling inspired by https://oppi.li/posts/plain_text_journaling/
+-- daily capture with bullet-journal signifiers, monthly consolidation
+-- signifiers: · (todo), × (done), - (note), o (event), > (moved)
+--
+-- >>> jt  # from shell, open/create today's journal
+-- >>> jy  # from shell, open yesterday's journal
+-- >>> jc  # from shell, consolidate current month
+--
+-- >>> ))) <leader>ojt  # inside vim, open today's journal
+-- >>> ))) <leader>ojy  # inside vim, open yesterday's journal
+-- >>> ))) <leader>ojc  # inside vim, consolidate current month
+-- >>> ))) <leader>ojs  # inside vim, search journal entries
+-- >>> ))) <leader>ojm  # inside vim, open current month's consolidated file
+
+-- open/create today's journal
+vim.keymap.set("n", "<leader>ojt", function()
+	local path = vim.fn.system("~/.config/bin/jt.sh"):gsub("%s+$", "")
+	vim.cmd("edit " .. path)
+end)
+
+-- open yesterday's journal
+vim.keymap.set("n", "<leader>ojy", function()
+	local path = vim.fn.system("~/.config/bin/jy.sh"):gsub("%s+$", "")
+	vim.cmd("edit " .. path)
+end)
+
+-- consolidate current month
+vim.keymap.set("n", "<leader>ojc", ":!~/.config/bin/jc.sh<cr>")
+
+-- search journal entries
+vim.keymap.set("n", "<leader>ojs", ':FzfLua live_grep cwd="/Users/poulycroc/PoulyStuff/journal"<cr>')
+
+-- open current month's consolidated file
+vim.keymap.set("n", "<leader>ojm", function()
+	local month_file = "/Users/poulycroc/PoulyStuff/journal/"
+		.. os.date("%Y")
+		.. "/"
+		.. os.date("%m")
+		.. ".md"
+	if vim.fn.filereadable(month_file) == 1 then
+		vim.cmd("edit " .. month_file)
+	else
+		vim.notify("No consolidated file yet for this month", vim.log.levels.WARN)
+	end
+end)
+
+-- journal autocommands: signifiers, sorting, syntax highlighting
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = "*/journal/*",
+	callback = function()
+		-- abbreviations for signifiers
+		vim.cmd("iabbrev <buffer> todo ·")
+		vim.cmd("iabbrev <buffer> done ×")
+
+		-- sort with gqip
+		vim.opt_local.formatprg = "sort -V"
+
+		-- syntax highlighting for signifiers
+		vim.cmd("syntax match JournalTodo /^·.*/")
+		vim.cmd("syntax match JournalDone /^×.*/")
+		vim.cmd("syntax match JournalEvent /^o .*/")
+		vim.cmd("syntax match JournalNote /^- .*/")
+		vim.cmd("syntax match JournalMoved /^>.*/")
+
+		vim.cmd("highlight JournalTodo ctermfg=White guifg=#ffffff")
+		vim.cmd("highlight JournalDone ctermfg=Grey guifg=#666666")
+		vim.cmd("highlight JournalEvent ctermfg=Cyan guifg=#00cccc")
+		vim.cmd("highlight JournalNote ctermfg=Yellow guifg=#cccc00")
+		vim.cmd("highlight JournalMoved ctermfg=Magenta guifg=#cc00cc")
+	end,
+})
