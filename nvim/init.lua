@@ -12,10 +12,12 @@ vim.pack.add({
 	{ src = "https://github.com/saghen/blink.compat" },
 	{ src = "https://github.com/ibhagwan/fzf-lua" },
 
+	-- git
 	{ src = "https://github.com/tpope/vim-fugitive" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/kdheepak/lazygit.nvim" },
 	{ src = "https://github.com/mbbill/undotree" },
+	{ src = "https://github.com/esmuellert/codediff.nvim" },
 
 	-- mini
 	{ src = "https://github.com/nvim-mini/mini.statusline" },
@@ -103,7 +105,7 @@ require("poulycroc.plugins.ai")
 require("poulycroc.plugins.git")
 -- require("poulycroc.plugins.languages")
 require("poulycroc.plugins.terminal")
-require('poulycroc.plugins.obsidian')
+require("poulycroc.plugins.obsidian")
 
 require("poulycroc.plugins.catppuccin")
 

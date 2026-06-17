@@ -59,3 +59,12 @@ require("gitsigns").setup({
 		vim.keymap.set("n", "gB", require("gitsigns").blame_line, { buffer = bufnr, desc = "toggle git blame" })
 	end,
 })
+
+require("codediff").setup({
+	highlights = {
+		char_brightness = 1.4,
+	},
+	explorer = {
+		auto_open_on_cursor = true,
+	},
+})

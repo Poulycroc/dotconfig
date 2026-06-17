@@ -8,6 +8,10 @@
       "rev": "1454f14",
       "src": "https://github.com/saghen/blink.compat"
     },
+    "codediff.nvim": {
+      "rev": "7608f3b",
+      "src": "https://github.com/esmuellert/codediff.nvim"
+    },
     "conform.nvim": [],
     "copilot.lua": [],
     "flash.nvim": [],
