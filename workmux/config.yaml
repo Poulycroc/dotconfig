@@ -1,0 +1,26 @@
+# each worktree opens as a separate session as opposed to windows
+mode: session
+# don't add agent icons to tmux windows
+status_format: false
+nerdfont: true
+# default agent
+agent: claude
+
+# agent based branch name creation: workmux add -A
+# no `model` key needed: agent: claude implies `claude --model haiku -p`
+auto_name:
+  system_prompt: >
+    Generate a kebab-case git branch name with an appropriate prefix.
+    Output only the name. Max 50 chars.
+  background: true
+
+# default window layout
+windows:
+  - name: editor
+    panes:
+      - command: nvim
+        focus: true
+  - name: server
+  - name: agent
+    panes:
+      - command: claude
