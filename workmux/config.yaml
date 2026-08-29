@@ -1,10 +1,17 @@
-# each worktree opens as a separate session as opposed to windows
-mode: session
-# don't add agent icons to tmux windows
+# worktrees open as windows in the current session, not separate sessions
+mode: window
+# don't add agent icons to tmux windows (the sidebar already shows status)
 status_format: false
 nerdfont: true
 # default agent
 agent: claude
+
+# live agent status pane. NOT automatic — toggle it with `workmux sidebar`
+# (prefix + W). This block only styles it. `-s` scopes it to one session.
+sidebar:
+  position: left
+  width: 40
+  layout: tiles
 
 # agent based branch name creation: workmux add -A
 # no `model` key needed: agent: claude implies `claude --model haiku -p`
@@ -14,13 +21,9 @@ auto_name:
     Output only the name. Max 50 chars.
   background: true
 
-# default window layout
-windows:
-  - name: editor
-    panes:
-      - command: nvim
-        focus: true
-  - name: server
-  - name: agent
-    panes:
-      - command: claude
+# [ sidebar | claude | nvim ] — sidebar is managed above, these two are the window
+panes:
+  - command: <agent>
+    focus: true
+  - command: nvim
+    split: horizontal
