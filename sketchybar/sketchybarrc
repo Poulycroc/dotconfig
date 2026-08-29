@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/sketchybar"
+export CONFIG_DIR
+source "$CONFIG_DIR/colors.sh"
+
+sketchybar --bar \
+  position=top \
+  height=30 \
+  margin=0 \
+  y_offset=0 \
+  corner_radius=0 \
+  color="$BAR_COLOR" \
+  padding_left=6 \
+  padding_right=6 \
+  topmost=window \
+  notch_width=220 \
+  notch_display_height=38
+
+# Mono: no pills, accent icon + text label
+sketchybar --default \
+  background.drawing=off \
+  icon.font="$FONT_ICON" \
+  icon.color="$ACCENT" \
+  icon.padding_left=8 \
+  icon.padding_right=4 \
+  label.font="$FONT_TEXT" \
+  label.color="$TEXT_COLOR" \
+  label.padding_left=4 \
+  label.padding_right=8
+
+ITEMS=(front_app media network runner caffeinate volume battery clock)
+for item in "${ITEMS[@]}"; do
+  source "$CONFIG_DIR/items/$item.sh"
+done
+
+sketchybar --update
+
+# Background loops (see plugins/gaps.sh, plugins/runner.sh)
+for loop in gaps runner; do
+  PIDFILE="$CONFIG_DIR/.$loop.pid"
+  kill "$(cat "$PIDFILE" 2>/dev/null)" 2>/dev/null
+  nohup "$CONFIG_DIR/plugins/$loop.sh" >/dev/null 2>&1 &
+  echo $! > "$PIDFILE"
+done

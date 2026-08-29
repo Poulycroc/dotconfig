@@ -22,3 +22,11 @@
 
 !workmux/
 !workmux/**
+
+!sketchybar/
+!sketchybar/**
+
+# sketchybar runtime files
+sketchybar/.gaps.pid
+sketchybar/.runner.pid
+sketchybar/.gaps.log
