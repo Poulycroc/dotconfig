@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-nowplaying-cli togglePlayPause
+media-control toggle-play-pause
 sleep 0.3
-"$(dirname "$0")/media.sh"
+NAME="${NAME:-media}" "$(dirname "$0")/media.sh"
