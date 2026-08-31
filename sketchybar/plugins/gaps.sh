@@ -16,7 +16,9 @@ on run argv
       try
         if (value of attribute "AXFullScreen" of w) is not true then
           set {x, y} to position of w
-          if y < top then
+          -- ponytail: main screen only (0 ≤ y). Screens above main have negative y;
+          -- clamping them yanked windows back to main. Bar strip on other screens unguarded.
+          if y ≥ 0 and y < top then
             set {wd, ht} to size of w
             set position of w to {x, top}
             set size of w to {wd, ht - (top - y)}
