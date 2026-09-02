@@ -15,5 +15,5 @@ sketchybar --add item apple left \
 	background.padding_left=8 \
 	label.padding_left=6 label.padding_right=8 \
 	script="$CONFIG_DIR/plugins/front_app.sh" \
-                 update_freq=5 \
+                 update_freq=1 \
                  click_script="$CONFIG_DIR/plugins/front_app_click.sh"

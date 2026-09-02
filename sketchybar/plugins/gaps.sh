@@ -12,16 +12,23 @@ on run argv
   set top to (item 1 of argv) as integer
   tell application "System Events"
     set p to first application process whose frontmost is true
-    repeat with w in (every window of p whose subrole is "AXStandardWindow")
+    -- Bulk fetches (2 Apple Events) instead of a whose-clause per poll: the whose
+    -- clause hogged System Events and starved front_app.sh's window-dot queries.
+    set subs to subrole of windows of p
+    set poss to position of windows of p
+    repeat with i from 1 to count of subs
       try
-        if (value of attribute "AXFullScreen" of w) is not true then
-          set {x, y} to position of w
+        if item i of subs is "AXStandardWindow" then
+          set {x, y} to item i of poss
           -- ponytail: main screen only (0 ≤ y). Screens above main have negative y;
           -- clamping them yanked windows back to main. Bar strip on other screens unguarded.
           if y ≥ 0 and y < top then
-            set {wd, ht} to size of w
-            set position of w to {x, top}
-            set size of w to {wd, ht - (top - y)}
+            set w to window i of p
+            if (value of attribute "AXFullScreen" of w) is not true then
+              set {wd, ht} to size of w
+              set position of w to {x, top}
+              set size of w to {wd, ht - (top - y)}
+            end if
           end if
         end if
       end try
@@ -29,5 +36,7 @@ on run argv
   end tell
 end run
 EOS
-	sleep 0.5
+	# ponytail: 2s poll — cheaper on System Events (front_app dots share it); dragged
+	# windows sit under the bar up to 2s before snap, acceptable.
+	sleep 2
 done
