@@ -30,9 +30,9 @@ vim.keymap.set("n", "<leader>on", function()
 		if not name or name == "" then
 			return
 		end
-		vim.cmd("ObsidianNew " .. name)
+		vim.cmd("Obsidian new " .. name)
 		vim.defer_fn(function()
-			vim.cmd("ObsidianTemplate note")
+			vim.cmd("Obsidian template note")
 		end, 100)
 	end)
 end)
@@ -97,11 +97,7 @@ vim.keymap.set("n", "<leader>ojs", ':FzfLua live_grep cwd="/Users/poulycroc/Poul
 
 -- open current month's consolidated file
 vim.keymap.set("n", "<leader>ojm", function()
-	local month_file = "/Users/poulycroc/PoulyStuff/journal/"
-		.. os.date("%Y")
-		.. "/"
-		.. os.date("%m")
-		.. ".md"
+	local month_file = "/Users/poulycroc/PoulyStuff/journal/" .. os.date("%Y") .. "/" .. os.date("%m") .. ".md"
 	if vim.fn.filereadable(month_file) == 1 then
 		vim.cmd("edit " .. month_file)
 	else

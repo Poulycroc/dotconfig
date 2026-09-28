@@ -75,10 +75,13 @@ vim.bo.shiftwidth = 2
 vim.o.autoindent = true
 vim.bo.autoindent = true
 vim.o.smartindent = true
-vim.opt.listchars = { tab = "| ", trail = "·", nbsp = "␣" }
+vim.o.listchars = { tab = "| ", trail = "·", nbsp = "␣" }
 
 -- Preview substitutions live, as you type!
 vim.o.inccommand = "split"
+
+-- optionally enable 24-bit colour
+vim.o.termguicolors = true
 
 -- Show which line your cursor is on
 vim.o.cursorline = true
@@ -92,3 +95,18 @@ vim.o.scrolloff = 10
 vim.o.confirm = true
 
 vim.g.kitty_protocol = false
+
+vim.diagnostic.config({
+	underline = true,
+	virtual_text = true,
+	update_in_insert = false,
+	severity_sort = true,
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = " ",
+			[vim.diagnostic.severity.WARN] = " ",
+			[vim.diagnostic.severity.HINT] = " ",
+			[vim.diagnostic.severity.INFO] = " ",
+		},
+	},
+})

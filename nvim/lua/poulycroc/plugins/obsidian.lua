@@ -1,4 +1,5 @@
 require("obsidian").setup({
+	legacy_commands = false,
 	workspaces = {
 		{
 			name = "PoulyStuff",
@@ -8,9 +9,9 @@ require("obsidian").setup({
 	notes_subdir = "inbox",
 	new_notes_location = "notes_subdir",
 
-	disable_frontmatter = true,
+	frontmatter = { enabled = false },
 	templates = {
-		subdir = "templates",
+		folder = "templates",
 		date_format = "%Y-%m-%d",
 		time_format = "%H:%M:%S",
 	},
@@ -31,26 +32,9 @@ require("obsidian").setup({
 	--   return current_datetime .. "_" .. suffix
 	-- end,
 
-	-- key mappings, below are the defaults
-	mappings = {
-		-- overrides the 'gf' mapping to work on markdown/wiki links within your vault
-		["gf"] = {
-			action = function()
-				return require("obsidian").util.gf_passthrough()
-			end,
-			opts = { noremap = false, expr = true, buffer = true },
-		},
-		-- toggle check-boxes
-		["<leader>ti"] = {
-			action = function()
-				return require("obsidian").util.toggle_checkbox()
-			end,
-			opts = { buffer = true },
-		},
-	},
-	completion = {
-		nvim_cmp = true,
-		min_chars = 2,
-	},
-	ui = { enable = false }, -- render-markdown.nvim handles all markdown UI
+	-- completion comes from the built-in obsidian-ls LSP server, blink picks it up via its lsp source
+	ui = { enable = false },
 })
+
+-- <CR> (smart action) follows links and toggles checkboxes by default
+vim.keymap.set("n", "<leader>ti", "<cmd>Obsidian toggle_checkbox<cr>", { desc = "Toggle checkbox" })

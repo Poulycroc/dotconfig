@@ -1,11 +1,8 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- optionally enable 24-bit colour
-vim.opt.termguicolors = true
-
 local function my_on_attach(bufnr)
-	local api = require "nvim-tree.api"
+	local api = require("nvim-tree.api")
 
 	local function opts(desc)
 		return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
@@ -64,14 +61,18 @@ local api = require("nvim-tree.api")
 vim.api.nvim_create_autocmd({ "BufEnter", "TabEnter" }, {
 	callback = function(args)
 		-- ignore the tree buffer itself
-		if vim.bo[args.buf].filetype == "NvimTree" then return end
+		if vim.bo[args.buf].filetype == "NvimTree" then
+			return
+		end
 		-- do nothing if the tree isn't visible
-		if not api.tree.is_visible() then return end
+		if not api.tree.is_visible() then
+			return
+		end
 		-- move the tree selection to the current buffer's file
 		api.tree.find_file({
-			buf   = args.buf,  -- current buffer
-			open  = false,     -- don't open the tree if it's closed
-			focus = false,     -- don't steal focus from your code window
+			buf = args.buf, -- current buffer
+			open = false, -- don't open the tree if it's closed
+			focus = false, -- don't steal focus from your code window
 			-- update_root = false, -- leave root alone; set true if you want root to follow
 		})
 	end,
@@ -84,4 +85,3 @@ vim.cmd([[
     :hi link NvimTreeImageFile   Title
 		:hi NvimTreeCursorLine guibg=#3b4252 guifg=#88c0d0
 ]])
-

@@ -2,6 +2,9 @@ local map = vim.keymap.set
 
 --  See `:help vim.keymap.set()`
 
+-- Disable Space bar since it will be used as the leader key
+vim.keymap.set({ "n", "v" }, "<leader>", "<nop>", { desc = "Disable leader key default" })
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 map("n", "<leader>nh", "<cmd>nohlsearch<CR>")
@@ -47,6 +50,8 @@ map("n", "<leader>ff", "<cmd>FzfLua files<CR>")
 map("n", "<leader>fb", "<cmd>FzfLua buffers<CR>")
 map("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>")
 map("n", "<leader>fh", "<cmd>FzfLua neovim help<CR>")
+
+-- Grapple
 map("n", "<leader>fl", "<cmd>Grapple toggle_tags<cr>", { desc = "Toggle tags menu" })
 
 map("n", "gR", "<cmd>FzfLua lsp_implementations<CR>")
@@ -65,32 +70,10 @@ map("n", "<leader>GU", ":UndotreeToggle<CR>", { desc = "Toggle UndoTree" })
 
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "toggle file explorer" })
 
--- laravel keymaps
-map("n", "<leader>llr", "<cmd>lua Laravel.pickers.routes()<cr>", { desc = "Laravel: Open tinkering" })
-map(
-	"n",
-	"<leader>llt",
-	"<cmd>lua Laravel.commands.run('gf')<cr>",
-	{ desc = "Laravel: Open tinkering", expr = true, noremap = true }
-)
-
--- comment
+-- Comment
 map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
 map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
--- test command
-map("n", "<leader>tr", "<cmd>Neotest run<cr>", { desc = "Neotest: run" })
-map("n", "<leader>ti", "<cmd>Neotest output<cr>", { desc = "Neotest: output" })
-map("n", "<leader>ts", "<cmd>Neotest summary<cr>", { desc = "Neo: summary" })
-
--- Grapple
-map("n", "<leader>m", "<cmd>Grapple toggle<cr>", { desc = "Grapple toggle tag" })
-map("n", "<leader>M", "<cmd>Grapple toggle_tags<cr>", { desc = "Grapple open tags window" })
-map("n", "<tab>", "<cmd>Grapple cycle_tags next<cr>", { desc = "Grapple cycle next tag" })
-map("n", "<S-tab>", "<cmd>Grapple cycle_tags prev<cr>", { desc = "Grapple cycle previous tag" })
-
--- Smart split
--- map("n", "<C-h>", require("smart-splits").move_cursor_left)
--- map("n", "<C-j>", require("smart-splits").move_cursor_down)
--- map("n", "<C-k>", require("smart-splits").move_cursor_up)
--- map("n", "<C-l>", require("smart-splits").move_cursor_right)
+-- Command-line completion
+map("c", "<C-j>", "<C-n>", { desc = "Next command-line completion" })
+map("c", "<C-k>", "<C-p>", { desc = "Previous command-line completion" })

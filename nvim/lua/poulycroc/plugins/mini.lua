@@ -1,27 +1,19 @@
--- Better Around/Inside textobjects
---
--- Examples:
---  - va)  - [V]isually select [A]round [)]paren
---  - yinq - [Y]ank [I]nside [N]ext [']quote
---  - ci'  - [C]hange [I]nside [']quote
-require("mini.ai").setup({
-	n_lines = 500,
-})
+-- enhanced, a and i keybinds
+require("mini.ai").setup()
 
--- Add/delete/replace surroundings (brackets, quotes, etc.)
---
--- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
--- - sd'   - [S]urround [D]elete [']quotes
--- - sr)'  - [S]urround [R]eplace [)] [']
-require("mini.surround").setup({
-	mappings = {
-		add = "za",
-		delete = "zd",
-		replace = "zr",
+-- auto pairs
+require("mini.pairs").setup()
+
+-- access to surround keymaps sa,sd,sc etc
+require("mini.surround").setup()
+
+-- git diff
+require("mini.diff").setup({
+	view = {
+		style = "sign",
+		signs = { add = "┃", change = "┃", delete = "┃" },
 	},
 })
-
-require("mini.pairs").setup()
 
 local statusline = require("mini.statusline")
 statusline.setup({ use_icons = vim.g.have_nerd_font })
