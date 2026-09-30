@@ -48,6 +48,9 @@ vim.pack.add({
 
 	"https://github.com/rachartier/tiny-inline-diagnostic.nvim",
 
+	-- AI
+	"https://github.com/zbirenbaum/copilot.lua",
+
 	-- tmux smart navigator
 	"https://github.com/christoomey/vim-tmux-navigator",
 
@@ -81,6 +84,9 @@ require("poulycroc.plugins.treesitter")
 require("poulycroc.plugins.blink")
 require("poulycroc.plugins.formatting")
 require("poulycroc.plugins.diagnostic")
+
+-- AI
+require("poulycroc.plugins.copilot")
 
 require("poulycroc.plugins.obsidian")
 
